@@ -13,9 +13,12 @@ jobs:
         with:
           workdir: .
           buildozer_version: stable
+        env:
+          # This helps avoid some common Docker permission issues
+          BUILDOZER_ALLOW_ROOT: 1
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: package
-          path: ${{ steps.buildozer.outputs.filename }}
+          path: bin/*.apk
